@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is AI? A First Look -- For Young Learners</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@400;500;600&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sun-gold: #F2A922;
+  --earth-brown: #8B5E3C;
+  --baobab-green: #4A7C59;
+  --sky-blue: #5BA4CF;
+  --sunset-orange: #E8734A;
+  --warm-cream: #FFF8EC;
+  --deep-night: #1A1A2E;
+  --soft-sand: #F5E6C8;
+  --clay-red: #C75B39;
+  --leaf-light: #A8D5A2;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Quicksand', 'Noto Sans Ethiopic', sans-serif;
+  background: var(--warm-cream);
+  color: #3D2B1F;
+  line-height: 1.7;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+/* ---- LANGUAGE SWITCHER ---- */
+.lang-bar {
+  background: var(--deep-night);
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.7);
+  padding: 0.4rem 1.2rem;
+  border-radius: 25px;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.lang-btn:hover {
+  border-color: var(--sun-gold);
+  color: var(--sun-gold);
+}
+
+.lang-btn.active {
+  background: var(--sun-gold);
+  border-color: var(--sun-gold);
+  color: var(--deep-night);
+}
+
+.lang-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Hide all languages by default */
+.lang { display: none; }
+.lang.active { display: block; }
+
+/* ---- HERO ---- */
+.hero {
+  background: linear-gradient(180deg, #F9C74F 0%, var(--sunset-orange) 40%, var(--clay-red) 70%, var(--deep-night) 100%);
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sun {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #FFF7AE, var(--sun-gold));
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(242,169,34,0.6), 0 0 120px rgba(242,169,34,0.3);
+  margin-bottom: 1.5rem;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(242,169,34,0.6); }
+  50% { transform: scale(1.08); box-shadow: 0 0 90px rgba(242,169,34,0.8); }
+}
+
+.baobab {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  width: 140px;
+  height: 200px;
+}
+.baobab .trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 100px;
+  background: #1A1A2E;
+  border-radius: 5px 5px 8px 8px;
+}
+.baobab .canopy {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 110px;
+  background: #1A1A2E;
+  border-radius: 50% 50% 20% 20%;
+}
+.baobab-right {
+  left: auto;
+  right: 8%;
+  transform: scaleX(-1);
+}
+
+.stars {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  height: 120px;
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.hero h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
+  color: white;
+  text-shadow: 2px 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.hero .subtitle {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--soft-sand);
+  font-weight: 500;
+  max-width: 500px;
+}
+
+/* ---- SECTIONS ---- */
+.section {
+  padding: 3rem 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.section h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.section p {
+  margin-bottom: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+}
+
+.story-box {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 5px solid var(--sun-gold);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.story-box .label {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  color: var(--sunset-orange);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.compare-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.compare-card .emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.compare-card h3 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.compare-card p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #5A4A3A;
+}
+
+.activity {
+  background: linear-gradient(135deg, var(--leaf-light), #D4EDDA);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 2px dashed var(--baobab-green);
+}
+
+.activity .label {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  color: var(--baobab-green);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.activity ol, .activity ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.activity li {
+  margin-bottom: 0.5rem;
+}
+
+.think-box {
+  background: linear-gradient(135deg, #E8E0F0, #F0E8F8);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 5px solid #9B72CF;
+}
+
+.think-box .label {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  color: #7B52AB;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.word-tag {
+  background: var(--sun-gold);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.promise-section {
+  background: linear-gradient(135deg, var(--baobab-green), #3A6B49);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.promise-section h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.promise-section p {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  font-size: 1.1rem;
+  color: var(--leaf-light);
+}
+
+.coming-soon {
+  display: inline-block;
+  background: var(--sun-gold);
+  color: var(--deep-night);
+  padding: 0.6rem 2rem;
+  border-radius: 30px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.footer {
+  background: var(--deep-night);
+  color: var(--soft-sand);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.footer a {
+  color: var(--sun-gold);
+  text-decoration: none;
+}
+
+.separator {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  letter-spacing: 8px;
+  color: var(--sun-gold);
+}
+
+@media (max-width: 480px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .baobab { width: 80px; height: 120px; }
+  .baobab .trunk { width: 18px; height: 60px; }
+  .baobab .canopy { width: 75px; height: 65px; bottom: 48px; }
+  .sun { width: 80px; height: 80px; }
+  body { font-size: 16px; }
+  .lang-btn { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======== LANGUAGE SWITCHER ======== -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="switchLang('en')">English</button>
+  <button class="lang-btn" onclick="switchLang('sw')">Kiswahili</button>
+  <button class="lang-btn" onclick="switchLang('fr')">Fran&ccedil;ais</button>
+  <button class="lang-btn" onclick="switchLang('ha')">Hausa</button>
+  <button class="lang-btn" onclick="switchLang('am')">&#4768;&#4635;&#4653;&#4763;</button>
+</div>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <div class="sun"></div>
+  <div class="lang en active">
+    <h1>What Is AI?</h1>
+    <p class="subtitle">A First Look for Young Learners</p>
+  </div>
+  <div class="lang sw">
+    <h1>AI ni Nini?</h1>
+    <p class="subtitle">Mtazamo wa Kwanza kwa Wanafunzi Wadogo</p>
+  </div>
+  <div class="lang fr">
+    <h1>C'est quoi l'IA ?</h1>
+    <p class="subtitle">Un premier regard pour les jeunes apprenants</p>
+  </div>
+  <div class="lang ha">
+    <h1>Mene ne AI?</h1>
+    <p class="subtitle">Duba na Farko don Yara Masu Koyo</p>
+  </div>
+  <div class="lang am">
+    <h1>AI &#4637;&#4757;&#4853;&#4757; &#4752;&#4813;?</h1>
+    <p class="subtitle">&#4616;&#4808;&#4899;&#4725; &#4720;&#4635;&#4651;&#4814;&#4733; &#4840;&#4632;&#4864;&#4632;&#4650;&#4843; &#4773;&#4845;&#4723;</p>
+  </div>
+  <div class="baobab"><div class="canopy"></div><div class="trunk"></div></div>
+  <div class="baobab baobab-right"><div class="canopy"></div><div class="trunk"></div></div>
+  <div class="stars">
+    <div class="star" style="left:10%;bottom:80px;animation-delay:0s"></div>
+    <div class="star" style="left:25%;bottom:40px;animation-delay:1.2s"></div>
+    <div class="star" style="left:45%;bottom:90px;animation-delay:0.5s"></div>
+    <div class="star" style="left:60%;bottom:30px;animation-delay:2s"></div>
+    <div class="star" style="left:75%;bottom:70px;animation-delay:0.8s"></div>
+    <div class="star" style="left:88%;bottom:50px;animation-delay:1.5s"></div>
+    <div class="star" style="left:15%;bottom:20px;animation-delay:2.5s"></div>
+    <div class="star" style="left:55%;bottom:60px;animation-delay:1.8s"></div>
+    <div class="star" style="left:35%;bottom:15px;animation-delay:0.3s"></div>
+    <div class="star" style="left:82%;bottom:95px;animation-delay:1s"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ENGLISH -->
+<!-- ============================================================ -->
+<div class="lang en active">
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sun-gold);color:white">&#x1F44B;</div>
+    <h2>Welcome, Young Thinker!</h2>
+  </div>
+  <p>You have heard people talk about <strong>AI</strong> -- maybe on the radio, at school, or from family. Some people say AI is very smart. Some people say it is dangerous. Some people think it is magic.</p>
+  <p>In this lesson, we will explore what AI really is -- step by step, like walking a path through the bush. No magic. No fear. Just understanding.</p>
+  <div class="story-box">
+    <div class="label">&#x1F333; Before We Start</div>
+    <p style="margin:0">This lesson does not need a computer. You can read it from a phone, a tablet, or even printed on paper. You can discuss it with friends under a tree. The best learning happens when we think together.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sky-blue);color:white">&#x1F9E0;</div>
+    <h2>What Is AI?</h2>
+  </div>
+  <p><strong>AI</strong> stands for <strong>Artificial Intelligence</strong>.</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F6E0;&#xFE0F;</div>
+      <h3>Artificial</h3>
+      <p>Made by humans. Not natural. Like a chair is artificial, but a tree is natural.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4A1;</div>
+      <h3>Intelligence</h3>
+      <p>The ability to learn, understand, and make decisions.</p>
+    </div>
+  </div>
+  <p>So <strong>Artificial Intelligence</strong> means: <em>a thing made by humans that can learn, understand, or make decisions</em>.</p>
+  <p>AI is not a person. It is not alive. It is a tool -- like a hoe, a bicycle, or a calculator -- but much more complex.</p>
+  <div class="story-box">
+    <div class="label">&#x1F4D6; A Story to Help You Understand</div>
+    <p>Imagine you have a friend who has read every book in the library. You can ask this friend questions and they answer quickly. But your friend has never tasted food, never felt rain on their face, never played football. They know many words but have not lived a life.</p>
+    <p style="margin:0">AI is a little like that friend. It can work with information very fast, but it does not experience the world the way you do.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sunset-orange);color:white">&#x1F4DA;</div>
+    <h2>How Does AI Learn?</h2>
+  </div>
+  <p>You learn by watching, listening, practising, and making mistakes. When you were small, you learned to speak by hearing your family talk. Nobody gave you a grammar book -- you just listened, tried, and got better.</p>
+  <p>AI learns in a similar way, but with data instead of life experience.</p>
+  <div class="story-box">
+    <div class="label">&#x1F414; Example: The Chicken and the Goat</div>
+    <p>Suppose you want to teach AI to tell the difference between a chicken and a goat. You would show it thousands of pictures: "This is a chicken. This is a goat. This is a chicken. This is a goat."</p>
+    <p>After seeing enough pictures, the AI starts to notice patterns -- chickens have feathers and beaks, goats have fur and horns. Now when you show it a new picture, it can guess.</p>
+    <p style="margin:0">But here is the important part: <strong>AI does not know what a chicken feels like. It does not know what a goat sounds like in the morning.</strong> It only knows patterns in pictures.</p>
+  </div>
+  <p>This process is called <strong>machine learning</strong> -- the machine learns from examples.</p>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Activity: Be the AI!</div>
+    <p>Play this game with your friends:</p>
+    <ol>
+      <li>One person draws 10 simple shapes on paper -- some circles, some squares, mixed together.</li>
+      <li>Show them to a friend one by one, saying "circle" or "square" each time.</li>
+      <li>Now draw a new shape and ask: "What is this?"</li>
+      <li>Your friend learned from examples, just like AI does!</li>
+    </ol>
+    <p style="margin:0"><strong>Discussion:</strong> What if you showed mostly circles and very few squares? Would your friend still guess correctly? This is a real problem in AI too -- it is called <em>bias</em>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--baobab-green);color:white">&#x1F30D;</div>
+    <h2>AI Around Us</h2>
+  </div>
+  <p>AI is already working in many places -- including in Africa:</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F33E;</div>
+      <h3>Farming</h3>
+      <p>AI helps farmers know when to plant, when rain is coming, and when crops are sick.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4F1;</div>
+      <h3>Mobile Money</h3>
+      <p>When you send money by phone, AI checks that the transaction is safe.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F3E5;</div>
+      <h3>Health</h3>
+      <p>AI helps doctors spot diseases faster, even in clinics with few doctors.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F5E3;&#xFE0F;</div>
+      <h3>Language</h3>
+      <p>AI is learning African languages so people can use technology in their mother tongue.</p>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="label">&#x1F50D; Activity: AI Detectives</div>
+    <p>Look around your community. Can you find three things that might use AI?</p>
+    <ul>
+      <li>Mobile phones and the apps on them</li>
+      <li>Radio stations that play music you like</li>
+      <li>Weather reports on TV or radio</li>
+      <li>Shops that suggest what to buy</li>
+    </ul>
+    <p style="margin:0"><strong>Draw or write</strong> what you find and share with the class!</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--clay-red);color:white">&#x26A0;&#xFE0F;</div>
+    <h2>AI Is Not Magic</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2757; Remember This</div>
+    <p style="margin:0;font-size:1.15rem"><strong>AI can be wrong. AI can be unfair. AI does not think like a human. AI is a tool made by people -- and people make mistakes.</strong></p>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x2764;&#xFE0F;</div>
+      <h3>Feel Love</h3>
+      <p>AI does not have emotions the way you do. It can use words about feelings but its experience is different from yours.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F333;</div>
+      <h3>Understand Life</h3>
+      <p>AI has never walked in a forest, tasted water from a stream, or watched the stars.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F91D;</div>
+      <h3>Replace People</h3>
+      <p>AI can help people, but it cannot replace the care of a teacher, a parent, or a friend.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x2696;&#xFE0F;</div>
+      <h3>Always Be Fair</h3>
+      <p>If AI learns from unfair examples, it will repeat that unfairness.</p>
+    </div>
+  </div>
+  <div class="think-box">
+    <div class="label">&#x1F914; Think About It</div>
+    <p>If an AI was trained mostly on pictures from one country, would it recognise things from your village? What if it only learned one language?</p>
+    <p style="margin:0">This is why <strong>your knowledge matters</strong>. The world needs people from everywhere to help build AI that works for everyone.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:#9B72CF;color:white">&#x1F3AF;</div>
+    <h2>Thinking Carefully About AI</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2753; Five Questions to Ask</div>
+    <ol style="padding-left:1.2rem">
+      <li><strong>Who made this AI?</strong> -- Someone built it. They made choices.</li>
+      <li><strong>What data did it learn from?</strong> -- If the data is limited, the AI will be too.</li>
+      <li><strong>Who benefits?</strong> -- Does it help the people using it?</li>
+      <li><strong>Can it be wrong?</strong> -- Always yes.</li>
+      <li><strong>What happens if it makes a mistake?</strong> -- Some mistakes can hurt people.</li>
+    </ol>
+  </div>
+  <div class="activity">
+    <div class="label">&#x1F4AC; Activity: The Village Council</div>
+    <p>Imagine a company says: "We have an AI that can decide which students are smart enough for secondary school."</p>
+    <ul>
+      <li>What questions would you ask?</li>
+      <li>Should a machine decide a child's future?</li>
+      <li>What would be fair? What would be dangerous?</li>
+    </ul>
+    <p style="margin:0">There are no wrong answers. The important thing is to <strong>think carefully</strong>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--earth-brown);color:white">&#x1F4DD;</div>
+    <h2>Your New Words</h2>
+  </div>
+  <div class="word-bank">
+    <span class="word-tag">Artificial Intelligence (AI)</span>
+    <span class="word-tag">Machine Learning</span>
+    <span class="word-tag">Data</span>
+    <span class="word-tag">Pattern</span>
+    <span class="word-tag">Bias</span>
+    <span class="word-tag">Algorithm</span>
+    <span class="word-tag">Tool</span>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x1F4D6; What These Words Mean</div>
+    <p><strong>Artificial Intelligence (AI):</strong> A tool made by humans that can learn from data and make decisions.</p>
+    <p><strong>Machine Learning:</strong> The way AI learns -- by looking at many examples and finding patterns.</p>
+    <p><strong>Data:</strong> Information. Pictures, numbers, words, sounds.</p>
+    <p><strong>Pattern:</strong> Something that repeats in a regular way.</p>
+    <p><strong>Bias:</strong> When something is unfair because it leans one way.</p>
+    <p><strong>Algorithm:</strong> A set of steps to solve a problem -- like a recipe for cooking.</p>
+    <p style="margin:0"><strong>Tool:</strong> Something humans make to help with a job.</p>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Final Activity</div>
+    <ul>
+      <li><strong>Draw</strong> what you imagine AI looks like.</li>
+      <li><strong>Write</strong> three sentences about what you learned.</li>
+      <li><strong>Tell</strong> someone at home one thing you learned about AI.</li>
+    </ul>
+    <p style="margin:0">The best way to learn is to share what you know.</p>
+  </div>
+</div>
+
+</div><!-- end English -->
+
+<!-- ============================================================ -->
+<!-- KISWAHILI -->
+<!-- ============================================================ -->
+<div class="lang sw">
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sun-gold);color:white">&#x1F44B;</div>
+    <h2>Karibu, Mwanafunzi Mdogo!</h2>
+  </div>
+  <p>Umewahi kusikia watu wakizungumza kuhusu <strong>AI</strong> -- labda kwenye redio, shuleni, au nyumbani. Watu wengine wanasema AI ni akili sana. Wengine wanasema ni hatari. Wengine wanafikiri ni uchawi.</p>
+  <p>Katika somo hili, tutajifunza AI ni nini hasa -- hatua kwa hatua, kama kutembea njia kupitia msituni. Hakuna uchawi. Hakuna hofu. Ni kuelewa tu.</p>
+  <div class="story-box">
+    <div class="label">&#x1F333; Kabla Hatujaanza</div>
+    <p style="margin:0">Somo hili halihitaji kompyuta. Unaweza kulisoma kwenye simu, kompyuta ndogo, au hata kwenye karatasi iliyochapishwa. Unaweza kuzungumza na marafiki chini ya mti. Kujifunza bora hutokea tunapofikiria pamoja.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sky-blue);color:white">&#x1F9E0;</div>
+    <h2>AI ni Nini?</h2>
+  </div>
+  <p><strong>AI</strong> inasimama kwa <strong>Akili Bandia</strong> (kwa Kiingereza: Artificial Intelligence).</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F6E0;&#xFE0F;</div>
+      <h3>Bandia</h3>
+      <p>Imetengenezwa na binadamu. Si ya asili. Kama kiti ni bandia, lakini mti ni wa asili.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4A1;</div>
+      <h3>Akili</h3>
+      <p>Uwezo wa kujifunza, kuelewa, na kufanya maamuzi.</p>
+    </div>
+  </div>
+  <p>Kwa hiyo <strong>Akili Bandia</strong> maana yake ni: <em>kitu kilichotengenezwa na binadamu ambacho kinaweza kujifunza, kuelewa, au kufanya maamuzi</em>.</p>
+  <p>AI si mtu. Haishi. Ni zana -- kama jembe, baiskeli, au kikokotoo -- lakini ni ngumu zaidi.</p>
+  <div class="story-box">
+    <div class="label">&#x1F4D6; Hadithi ya Kukusaidia Kuelewa</div>
+    <p>Fikiria una rafiki ambaye amesoma kila kitabu katika maktaba. Unaweza kumuuliza maswali na anajibu haraka. Lakini rafiki yako hajawahi kuonja chakula, hajawahi kuhisi mvua usoni mwake, hajawahi kucheza mpira.</p>
+    <p style="margin:0">AI ni kama rafiki huyo. Inaweza kufanya kazi na habari haraka sana, lakini haipitii ulimwengu kama unavyofanya wewe.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sunset-orange);color:white">&#x1F4DA;</div>
+    <h2>AI Inajifunzaje?</h2>
+  </div>
+  <p>Unajifunza kwa kuangalia, kusikiliza, kufanya mazoezi, na kufanya makosa. Ulipokuwa mdogo, ulijifunza kusema kwa kusikia familia yako ikizungumza.</p>
+  <p>AI inajifunza kwa njia inayofanana, lakini kwa kutumia <strong>data</strong> badala ya uzoefu wa maisha.</p>
+  <div class="story-box">
+    <div class="label">&#x1F414; Mfano: Kuku na Mbuzi</div>
+    <p>Tuseme unataka kumfundisha AI kutofautisha kuku na mbuzi. Ungemwonyesha picha elfu nyingi: "Huyu ni kuku. Huyu ni mbuzi. Huyu ni kuku. Huyu ni mbuzi."</p>
+    <p>Baada ya kuona picha za kutosha, AI inaanza kutambua mifumo -- kuku wana manyoya na midomo, mbuzi wana nywele na pembe.</p>
+    <p style="margin:0">Lakini kumbuka: <strong>AI haijui kuku anavyohisi. Haijui mbuzi anavyolia asubuhi.</strong> Inajua mifumo katika picha tu.</p>
+  </div>
+  <p>Mchakato huu unaitwa <strong>ujifunzaji wa mashine</strong> -- mashine inajifunza kutokana na mifano.</p>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Shughuli: Kuwa AI!</div>
+    <p>Cheza mchezo huu na marafiki zako:</p>
+    <ol>
+      <li>Mtu mmoja anachora maumbo 10 kwenye karatasi -- baadhi ni miduara, baadhi ni mraba.</li>
+      <li>Waonyeshe rafiki mmoja mmoja, ukisema "duara" au "mraba" kila wakati.</li>
+      <li>Sasa chora umbo jipya na uulize: "Hili ni nini?"</li>
+      <li>Rafiki yako amejifunza kutokana na mifano, kama AI inavyofanya!</li>
+    </ol>
+    <p style="margin:0"><strong>Jadilianeni:</strong> Je, kama ungemwonyesha miduara mingi na miraba michache tu? Je, rafiki yako bado angeweza kukisia? Hii ni tatizo halisi katika AI -- inaitwa <em>upendeleo</em>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--baobab-green);color:white">&#x1F30D;</div>
+    <h2>AI Karibu Nasi</h2>
+  </div>
+  <p>AI tayari inafanya kazi katika sehemu nyingi -- ikiwa ni pamoja na Afrika:</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F33E;</div>
+      <h3>Kilimo</h3>
+      <p>AI inasaidia wakulima kujua lini wapande na wakati mvua inakuja.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4F1;</div>
+      <h3>Pesa za Simu</h3>
+      <p>Unapotuma pesa kwa simu, AI inachunguza usalama.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F3E5;</div>
+      <h3>Afya</h3>
+      <p>AI inasaidia madaktari kutambua magonjwa haraka zaidi.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F5E3;&#xFE0F;</div>
+      <h3>Lugha</h3>
+      <p>AI inajifunza lugha za Kiafrika ili watu watumie teknolojia kwa lugha yao.</p>
+    </div>
+  </div>
+  <div class="activity">
+    <div class="label">&#x1F50D; Shughuli: Wapelelezi wa AI</div>
+    <p>Angalia katika jamii yako. Je, unaweza kupata vitu vitatu ambavyo vinaweza kutumia AI?</p>
+    <p style="margin:0"><strong>Chora au andika</strong> unavyopata na ushiriki na darasa!</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--clay-red);color:white">&#x26A0;&#xFE0F;</div>
+    <h2>AI si Uchawi</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2757; Kumbuka Hili</div>
+    <p style="margin:0;font-size:1.15rem"><strong>AI inaweza kukosea. AI inaweza kuwa si haki. AI haifikiri kama binadamu. AI ni zana iliyotengenezwa na watu -- na watu hufanya makosa.</strong></p>
+  </div>
+  <div class="think-box">
+    <div class="label">&#x1F914; Fikiria Kuhusu Hili</div>
+    <p>Je, kama AI ilifundishwa kwa picha kutoka nchi moja tu, je, ingetambua vitu vya kijiji chako? Je, kama ilijifunza lugha moja tu?</p>
+    <p style="margin:0">Ndiyo maana <strong>maarifa yako ni muhimu</strong>. Ulimwengu unahitaji watu kutoka kila mahali kusaidia kujenga AI inayofanya kazi kwa kila mtu.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:#9B72CF;color:white">&#x1F3AF;</div>
+    <h2>Kufikiri kwa Uangalifu Kuhusu AI</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2753; Maswali Matano ya Kuuliza</div>
+    <ol style="padding-left:1.2rem">
+      <li><strong>Nani alitengeneza AI hii?</strong> -- Mtu fulani alijenga. Walifanya uchaguzi.</li>
+      <li><strong>Ilijifunza kutoka data gani?</strong> -- Kama data ni chache, AI pia itakuwa chache.</li>
+      <li><strong>Nani anafaidika?</strong> -- Je, inasaidia watu wanaotumia?</li>
+      <li><strong>Je, inaweza kukosea?</strong> -- Siku zote ndiyo.</li>
+      <li><strong>Nini kitatokea ikifanya kosa?</strong> -- Makosa mengine yanaweza kuwadhuru watu.</li>
+    </ol>
+  </div>
+  <div class="activity">
+    <div class="label">&#x1F4AC; Shughuli: Baraza la Kijiji</div>
+    <p>Fikiria kampuni inakuja na kusema: "Tuna AI inayoweza kuamua wanafunzi gani wana akili ya kutosha kwa shule ya sekondari."</p>
+    <ul>
+      <li>Maswali gani ungeyauliza?</li>
+      <li>Je, mashine inapaswa kuamua mustakabali wa mtoto?</li>
+      <li>Nini kingekuwa haki? Nini kingekuwa hatari?</li>
+    </ul>
+    <p style="margin:0">Hakuna majibu mabaya. Jambo muhimu ni <strong>kufikiri kwa uangalifu</strong>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--earth-brown);color:white">&#x1F4DD;</div>
+    <h2>Maneno Yako Mapya</h2>
+  </div>
+  <div class="word-bank">
+    <span class="word-tag">Akili Bandia (AI)</span>
+    <span class="word-tag">Ujifunzaji wa Mashine</span>
+    <span class="word-tag">Data</span>
+    <span class="word-tag">Mfumo</span>
+    <span class="word-tag">Upendeleo</span>
+    <span class="word-tag">Algoriti</span>
+    <span class="word-tag">Zana</span>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Shughuli ya Mwisho</div>
+    <ul>
+      <li><strong>Chora</strong> unavyofikiri AI inaonekanaje.</li>
+      <li><strong>Andika</strong> sentensi tatu kuhusu ulichojifunza.</li>
+      <li><strong>Mwambie</strong> mtu nyumbani kitu kimoja ulichojifunza kuhusu AI.</li>
+    </ul>
+    <p style="margin:0">Njia bora ya kujifunza ni kushiriki unachokijua.</p>
+  </div>
+</div>
+
+</div><!-- end Kiswahili -->
+
+<!-- ============================================================ -->
+<!-- FRANCAIS -->
+<!-- ============================================================ -->
+<div class="lang fr">
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sun-gold);color:white">&#x1F44B;</div>
+    <h2>Bienvenue, Jeune Penseur !</h2>
+  </div>
+  <p>Tu as entendu des gens parler de <strong>l'IA</strong> -- peut-&ecirc;tre &agrave; la radio, &agrave; l'&eacute;cole, ou dans ta famille. Certains disent que l'IA est tr&egrave;s intelligente. D'autres disent qu'elle est dangereuse. Certains pensent que c'est de la magie.</p>
+  <p>Dans cette le&ccedil;on, nous allons d&eacute;couvrir ce qu'est vraiment l'IA -- &eacute;tape par &eacute;tape, comme marcher sur un chemin dans la brousse. Pas de magie. Pas de peur. Juste comprendre.</p>
+  <div class="story-box">
+    <div class="label">&#x1F333; Avant de Commencer</div>
+    <p style="margin:0">Cette le&ccedil;on n'a pas besoin d'ordinateur. Tu peux la lire sur un t&eacute;l&eacute;phone, une tablette, ou m&ecirc;me sur papier. Tu peux en discuter avec tes amis sous un arbre. On apprend mieux quand on r&eacute;fl&eacute;chit ensemble.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sky-blue);color:white">&#x1F9E0;</div>
+    <h2>C'est quoi l'IA ?</h2>
+  </div>
+  <p><strong>IA</strong> veut dire <strong>Intelligence Artificielle</strong>.</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F6E0;&#xFE0F;</div>
+      <h3>Artificielle</h3>
+      <p>Fabriqu&eacute;e par les humains. Pas naturelle. Une chaise est artificielle, un arbre est naturel.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4A1;</div>
+      <h3>Intelligence</h3>
+      <p>La capacit&eacute; d'apprendre, de comprendre et de prendre des d&eacute;cisions.</p>
+    </div>
+  </div>
+  <p>Donc <strong>Intelligence Artificielle</strong> signifie : <em>un outil cr&eacute;&eacute; par les humains qui peut apprendre, comprendre ou prendre des d&eacute;cisions</em>.</p>
+  <p>L'IA n'est pas une personne. Elle n'est pas vivante. C'est un outil -- comme une houe, un v&eacute;lo ou une calculatrice -- mais beaucoup plus complexe.</p>
+  <div class="story-box">
+    <div class="label">&#x1F4D6; Une Histoire pour Comprendre</div>
+    <p>Imagine un ami qui a lu tous les livres de la biblioth&egrave;que. Tu peux lui poser des questions et il r&eacute;pond vite. Mais cet ami n'a jamais go&ucirc;t&eacute; de nourriture, n'a jamais senti la pluie sur son visage, n'a jamais jou&eacute; au football.</p>
+    <p style="margin:0">L'IA ressemble un peu &agrave; cet ami. Elle traite les informations tr&egrave;s vite, mais elle ne vit pas le monde comme toi.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sunset-orange);color:white">&#x1F4DA;</div>
+    <h2>Comment l'IA Apprend-elle ?</h2>
+  </div>
+  <p>Tu apprends en regardant, en &eacute;coutant, en pratiquant et en faisant des erreurs. Quand tu &eacute;tais petit, tu as appris &agrave; parler en &eacute;coutant ta famille.</p>
+  <p>L'IA apprend d'une fa&ccedil;on similaire, mais avec des <strong>donn&eacute;es</strong> au lieu d'exp&eacute;riences de vie.</p>
+  <div class="story-box">
+    <div class="label">&#x1F414; Exemple : Le Poulet et la Ch&egrave;vre</div>
+    <p>Supposons que tu veuilles apprendre &agrave; l'IA &agrave; faire la diff&eacute;rence entre un poulet et une ch&egrave;vre. Tu lui montres des milliers de photos : "Ceci est un poulet. Ceci est une ch&egrave;vre."</p>
+    <p>Apr&egrave;s avoir vu assez de photos, l'IA commence &agrave; remarquer des <strong>motifs</strong> -- les poulets ont des plumes et des becs, les ch&egrave;vres ont de la fourrure et des cornes.</p>
+    <p style="margin:0">Mais souviens-toi : <strong>l'IA ne sait pas ce qu'un poulet ressent. Elle ne sait pas comment une ch&egrave;vre sonne le matin.</strong> Elle ne conna&icirc;t que des motifs dans les images.</p>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Activit&eacute; : Sois l'IA !</div>
+    <p>Joue &agrave; ce jeu avec tes amis :</p>
+    <ol>
+      <li>Une personne dessine 10 formes -- des cercles et des carr&eacute;s m&eacute;lang&eacute;s.</li>
+      <li>Montre-les un par un en disant "cercle" ou "carr&eacute;".</li>
+      <li>Dessine une nouvelle forme et demande : "Qu'est-ce que c'est ?"</li>
+      <li>Ton ami a appris &agrave; partir d'exemples, comme l'IA !</li>
+    </ol>
+    <p style="margin:0"><strong>Discussion :</strong> Et si tu montrais surtout des cercles et tr&egrave;s peu de carr&eacute;s ? C'est un vrai probl&egrave;me de l'IA -- on appelle &ccedil;a le <em>biais</em>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--baobab-green);color:white">&#x1F30D;</div>
+    <h2>L'IA Autour de Nous</h2>
+  </div>
+  <p>L'IA travaille d&eacute;j&agrave; dans beaucoup d'endroits en Afrique :</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F33E;</div>
+      <h3>Agriculture</h3>
+      <p>L'IA aide les agriculteurs &agrave; savoir quand planter et quand la pluie arrive.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4F1;</div>
+      <h3>Argent Mobile</h3>
+      <p>Quand tu envoies de l'argent par t&eacute;l&eacute;phone, l'IA v&eacute;rifie la s&eacute;curit&eacute;.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F3E5;</div>
+      <h3>Sant&eacute;</h3>
+      <p>L'IA aide les m&eacute;decins &agrave; d&eacute;tecter les maladies plus vite.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F5E3;&#xFE0F;</div>
+      <h3>Langues</h3>
+      <p>L'IA apprend les langues africaines pour que les gens utilisent la technologie dans leur langue maternelle.</p>
+    </div>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--clay-red);color:white">&#x26A0;&#xFE0F;</div>
+    <h2>L'IA n'est pas de la Magie</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2757; Souviens-toi</div>
+    <p style="margin:0;font-size:1.15rem"><strong>L'IA peut se tromper. L'IA peut &ecirc;tre injuste. L'IA ne pense pas comme un humain. C'est un outil fait par des gens -- et les gens font des erreurs.</strong></p>
+  </div>
+  <div class="think-box">
+    <div class="label">&#x1F914; R&eacute;fl&eacute;chis</div>
+    <p>Si une IA &eacute;tait form&eacute;e surtout avec des photos d'un seul pays, reconna&icirc;trait-elle les choses de ton village ?</p>
+    <p style="margin:0">C'est pourquoi <strong>tes connaissances comptent</strong>. Le monde a besoin de gens de partout pour construire une IA qui marche pour tout le monde.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:#9B72CF;color:white">&#x1F3AF;</div>
+    <h2>R&eacute;fl&eacute;chir avec Soin</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2753; Cinq Questions &agrave; Poser</div>
+    <ol style="padding-left:1.2rem">
+      <li><strong>Qui a cr&eacute;&eacute; cette IA ?</strong> -- Quelqu'un l'a construite. Il a fait des choix.</li>
+      <li><strong>Quelles donn&eacute;es a-t-elle utilis&eacute;es ?</strong> -- Si les donn&eacute;es sont limit&eacute;es, l'IA le sera aussi.</li>
+      <li><strong>Qui en profite ?</strong> -- Est-ce qu'elle aide ceux qui l'utilisent ?</li>
+      <li><strong>Peut-elle se tromper ?</strong> -- Toujours oui.</li>
+      <li><strong>Que se passe-t-il si elle fait une erreur ?</strong> -- Certaines erreurs peuvent blesser des gens.</li>
+    </ol>
+  </div>
+  <div class="activity">
+    <div class="label">&#x1F4AC; Activit&eacute; : Le Conseil du Village</div>
+    <p>Imagine qu'une entreprise dise : "Nous avons une IA qui peut d&eacute;cider quels &eacute;l&egrave;ves sont assez intelligents pour le coll&egrave;ge."</p>
+    <ul>
+      <li>Quelles questions poserais-tu ?</li>
+      <li>Une machine devrait-elle d&eacute;cider de l'avenir d'un enfant ?</li>
+    </ul>
+    <p style="margin:0">Il n'y a pas de mauvaises r&eacute;ponses. L'important est de <strong>r&eacute;fl&eacute;chir avec soin</strong>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--earth-brown);color:white">&#x1F4DD;</div>
+    <h2>Tes Nouveaux Mots</h2>
+  </div>
+  <div class="word-bank">
+    <span class="word-tag">Intelligence Artificielle (IA)</span>
+    <span class="word-tag">Apprentissage Automatique</span>
+    <span class="word-tag">Donn&eacute;es</span>
+    <span class="word-tag">Motif</span>
+    <span class="word-tag">Biais</span>
+    <span class="word-tag">Algorithme</span>
+    <span class="word-tag">Outil</span>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Activit&eacute; Finale</div>
+    <ul>
+      <li><strong>Dessine</strong> ce que tu imagines que l'IA ressemble.</li>
+      <li><strong>&Eacute;cris</strong> trois phrases sur ce que tu as appris.</li>
+      <li><strong>Raconte</strong> &agrave; quelqu'un chez toi une chose que tu as apprise sur l'IA.</li>
+    </ul>
+    <p style="margin:0">La meilleure fa&ccedil;on d'apprendre est de partager ce que tu sais.</p>
+  </div>
+</div>
+
+</div><!-- end French -->
+
+<!-- ============================================================ -->
+<!-- HAUSA -->
+<!-- ============================================================ -->
+<div class="lang ha">
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sun-gold);color:white">&#x1F44B;</div>
+    <h2>Barka da Zuwa, Sabon Mai Tunani!</h2>
+  </div>
+  <p>Ka ji mutane suna magana game da <strong>AI</strong> -- watakon a rediyo, a makaranta, ko daga iyali. Wasu suna cewa AI yana da wayo sosai. Wasu suna cewa yana da hadari. Wasu suna tunanin sihiri ne.</p>
+  <p>A wannan darasi, za mu bincika me ne AI a hakikanin gaskiya -- mataki-mataki, kamar tafiya kan hanya a cikin daji. Babu sihiri. Babu tsoro. Fahimta kawai.</p>
+  <div class="story-box">
+    <div class="label">&#x1F333; Kafin Mu Fara</div>
+    <p style="margin:0">Wannan darasi bai bukaci kwamfuta ba. Za ka iya karantawa daga waya, tablet, ko ma a takarda da aka buga. Za ka iya tattaunawa da abokai a karkashin bishiya. Koyo mafi kyau yana faruwa idan muna tunani tare.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sky-blue);color:white">&#x1F9E0;</div>
+    <h2>Mene ne AI?</h2>
+  </div>
+  <p><strong>AI</strong> yana tsaye don <strong>Artificial Intelligence</strong> -- a Hausa, ana iya cewa <strong>Basiran Kere-kere</strong>.</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F6E0;&#xFE0F;</div>
+      <h3>Kere-kere</h3>
+      <p>Mutane ne suka kera shi. Ba na asali ba ne. Kamar kujera kere-kere ne, amma bishiya na asali ne.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4A1;</div>
+      <h3>Basira</h3>
+      <p>Ikon koyo, fahimta, da yanke shawara.</p>
+    </div>
+  </div>
+  <p><strong>Basiran Kere-kere</strong> yana nufin: <em>abu da mutane suka kera wanda zai iya koyo, fahimta, ko yanke shawara</em>.</p>
+  <p>AI ba mutum ba ne. Ba yana da rai ba. Kayan aiki ne -- kamar fartanya, keke, ko na'ura mai lissafi -- amma ya fi rikitarwa.</p>
+  <div class="story-box">
+    <div class="label">&#x1F4D6; Labari don Taimaka maka Fahimta</div>
+    <p>Ka yi tunanin kana da aboki wanda ya karanta kowane littafi a cikin laburare. Za ka iya tambayar abokin kuma ya amsa da sauri. Amma abokin ka bai taba dandin abinci ba, bai taba jin ruwan sama a fuskarsa ba, bai taba buga kwallon kafa ba.</p>
+    <p style="margin:0">AI yana kama da wannan aboki. Yana iya aiki da bayanai da sauri sosai, amma ba ya rayuwa a duniya yadda kake yi.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sunset-orange);color:white">&#x1F4DA;</div>
+    <h2>Yaya AI Yake Koyo?</h2>
+  </div>
+  <p>Kana koyo ta hanyar kallo, sauraro, aiki, da yin kuskure. Sa'adin ka yi karami, ka koyi magana ta hanyar jin iyalinka suna magana.</p>
+  <p>AI yana koyo a hanya irin wannan, amma da <strong>bayanai</strong> maimakon kwarewar rayuwa.</p>
+  <div class="story-box">
+    <div class="label">&#x1F414; Misali: Kaza da Akuya</div>
+    <p>Ka ce kana so ka koya wa AI bambancin kaza da akuya. Za ka nuna masa hotuna dubbai: "Wannan kaza ce. Wannan akuya ce."</p>
+    <p>Bayan ganin hotuna da yawa, AI ya fara gane tsari -- kaji suna da gashin fuka-fuki da baki, awaki suna da gashi da kahoni.</p>
+    <p style="margin:0">Amma ka tuna: <strong>AI ba ya sanin yadda kaza take ji. Ba ya sanin yadda akuya take kira da safe.</strong> Yana san tsari a cikin hotuna kawai.</p>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Aiki: Ka Zama AI!</div>
+    <p>Ka yi wannan wasa da abokanka:</p>
+    <ol>
+      <li>Mutum daya ya zana siffofi 10 -- wasu da'ira, wasu murabba'i.</li>
+      <li>Nuna su ga aboki daya-daya, kana cewa "da'ira" ko "murabba'i".</li>
+      <li>Yanzu zana sabon siffa ka ce: "Mene ne wannan?"</li>
+      <li>Abokinka ya koyi daga misalai, kamar yadda AI yake!</li>
+    </ol>
+    <p style="margin:0"><strong>Tattaunawa:</strong> Me zai faru idan ka nuna da'ira da yawa amma murabba'i kadan? Wannan matsala ce ta gaske a AI -- ana kiranta <em>son kai</em>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--baobab-green);color:white">&#x1F30D;</div>
+    <h2>AI a Kusa da Mu</h2>
+  </div>
+  <p>AI yana aiki a wurare da yawa a Afrika:</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F33E;</div>
+      <h3>Noma</h3>
+      <p>AI yana taimaka wa manoma su san lokacin shuka da lokacin ruwan sama.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4F1;</div>
+      <h3>Kudin Waya</h3>
+      <p>Idan ka aika kudi ta waya, AI yana duba lafiyar kasuwancin.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F3E5;</div>
+      <h3>Lafiya</h3>
+      <p>AI yana taimaka wa likitoci gano cututtuka cikin sauri.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F5E3;&#xFE0F;</div>
+      <h3>Harshe</h3>
+      <p>AI yana koyon harsunan Afirka don mutane su yi amfani da fasaha cikin harshen uwa.</p>
+    </div>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--clay-red);color:white">&#x26A0;&#xFE0F;</div>
+    <h2>AI Ba Sihiri Ba Ne</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2757; Ka Tuna Wannan</div>
+    <p style="margin:0;font-size:1.15rem"><strong>AI zai iya yin kuskure. AI zai iya zama maras adalci. AI ba ya tunani kamar dan adam. AI kayan aiki ne da mutane suka yi -- kuma mutane suna yin kuskure.</strong></p>
+  </div>
+  <div class="think-box">
+    <div class="label">&#x1F914; Ka Yi Tunani</div>
+    <p>Idan an koya wa AI da hotuna daga kasa daya kawai, zai iya gane abubuwan kauyenka? Idan ya koyi harshe daya kawai fa?</p>
+    <p style="margin:0">Shi ya sa <strong>ilimin ka yana da muhimmanci</strong>. Duniya tana bukatar mutane daga ko'ina don taimakawa gina AI da ya dace da kowa.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--earth-brown);color:white">&#x1F4DD;</div>
+    <h2>Sabbin Kalmomin Ka</h2>
+  </div>
+  <div class="word-bank">
+    <span class="word-tag">Basiran Kere-kere (AI)</span>
+    <span class="word-tag">Koyon Na'ura</span>
+    <span class="word-tag">Bayanai</span>
+    <span class="word-tag">Tsari</span>
+    <span class="word-tag">Son Kai</span>
+    <span class="word-tag">Tsarin Magance Matsala</span>
+    <span class="word-tag">Kayan Aiki</span>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Aikin Karshe</div>
+    <ul>
+      <li><strong>Zana</strong> hoton abin da kake tunanin AI yake kama.</li>
+      <li><strong>Rubuta</strong> jumla uku game da abin da ka koya.</li>
+      <li><strong>Gaya</strong> wa wani a gida abu daya da ka koya game da AI.</li>
+    </ul>
+    <p style="margin:0">Hanya mafi kyawu ta koyo ita ce raba abin da ka sani.</p>
+  </div>
+</div>
+
+</div><!-- end Hausa -->
+
+<!-- ============================================================ -->
+<!-- AMHARIC -->
+<!-- ============================================================ -->
+<div class="lang am">
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sun-gold);color:white">&#x1F44B;</div>
+    <h2>&#4773;&#4757;&#4707;&#4773; &#4779;&#4616;&#4813;&#4963; &#4808;&#4899;&#4725; &#4768;&#4661;&#4723;&#4811;&#4845;!</h2>
+  </div>
+  <p>&#4661;&#4616; <strong>AI</strong> &#4656;&#4813;&#4733; &#4656;&#4637;&#4720;&#4813; &#4845;&#4614;&#4755;&#4621; -- &#4637;&#4755;&#4621;&#4707;&#4725; &#4704;&#4652;&#4852;&#4846;&#4963; &#4704;&#4725;/&#4710;&#4725;&#4963; &#4808;&#4845;&#4637; &#4776;&#4674;&#4720;&#4656;&#4709;&#4962; &#4768;&#4757;&#4853;&#4814;&#4733; AI &#4704;&#4867;&#4637; &#4709;&#4617; &#4752;&#4813; &#4845;&#4619;&#4617;&#4962; &#4768;&#4757;&#4853;&#4814;&#4733; &#4768;&#4853;&#4875;&#4637;&#4814;&#4733; &#4752;&#4813; &#4845;&#4619;&#4617;&#4962; &#4768;&#4757;&#4853;&#4814;&#4733; &#4653;&#4677;&#4725; &#4752;&#4813; &#4709;&#4616;&#4813; &#4843;&#4661;&#4707;&#4617;&#4962;</p>
+  <p>&#4704;&#4826;&#4613; &#4725;&#4637;&#4613;&#4653;&#4725; AI &#4704;&#4773;&#4813;&#4752;&#4725; &#4637;&#4757; &#4773;&#4757;&#4848;&#4614;&#4752; &#4773;&#4755;&#4808;&#4683;&#4616;&#4757; -- &#4773;&#4653;&#4637;&#4867; &#4704;&#4773;&#4653;&#4637;&#4867;&#4962; &#4653;&#4677;&#4725; &#4840;&#4616;&#4637;&#4962; &#4941;&#4653;&#4627;&#4725; &#4840;&#4616;&#4637;&#4962; &#4632;&#4648;&#4851;&#4725; &#4709;&#4731;&#4962;</p>
+  <div class="story-box">
+    <div class="label">&#x1F333; &#4776;&#4632;&#4864;&#4632;&#4651;&#4733;&#4757; &#4704;&#4941;&#4725;</div>
+    <p style="margin:0">&#4845;&#4613; &#4725;&#4637;&#4613;&#4653;&#4725; &#4778;&#4638;&#4949;&#4841;&#4720;&#4653; &#4768;&#4845;&#4936;&#4621;&#4877;&#4637;&#4962; &#4776;&#4661;&#4621;&#4781;&#4963; &#4776;&#4723;&#4709;&#4620;&#4725;&#4963; &#4808;&#4845;&#4637; &#4776;&#4808;&#4648;&#4672;&#4725; &#4619;&#4845; &#4635;&#4757;&#4709;&#4709; &#4725;&#4733;&#4619;&#4619;&#4609;&#4962; &#4776;&#4877;&#4853;&#4638;&#4731;&#4733;&#4609; &#4875;&#4653; &#4776;&#4827;&#4941; &#4661;&#4653; &#4635;&#4811;&#4843;&#4725; &#4725;&#4733;&#4619;&#4619;&#4609;&#4962; &#4725;&#4621;&#4677;&#4773; &#4725;&#4637;&#4613;&#4653;&#4725; &#4768;&#4709;&#4648;&#4757; &#4661;&#4755;&#4661;&#4709; &#4845;&#4776;&#4656;&#4723;&#4621;&#4962;</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sky-blue);color:white">&#x1F9E0;</div>
+    <h2>AI &#4637;&#4757;&#4853;&#4757; &#4752;&#4813;?</h2>
+  </div>
+  <p><strong>AI</strong> &#4635;&#4616;&#4725; <strong>&#4656;&#4813; &#4656;&#4651;&#4667; &#4773;&#4813;&#4672;&#4725;</strong> &#4752;&#4813; (Artificial Intelligence)&#4962;</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F6E0;&#xFE0F;</div>
+      <h3>&#4656;&#4813; &#4656;&#4651;&#4667;</h3>
+      <p>&#4704;&#4656;&#4813; &#4840;&#4720;&#4656;&#4651;&#4962; &#4720;&#4939;&#4899;&#4650; &#4768;&#4845;&#4848;&#4616;&#4637;&#4962; &#4808;&#4757;&#4704;&#4653; &#4656;&#4813; &#4656;&#4651;&#4667; &#4752;&#4813;&#4963; &#4827;&#4941; &#4714;&#4637; &#4720;&#4939;&#4899;&#4650; &#4752;&#4813;&#4962;</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4A1;</div>
+      <h3>&#4773;&#4813;&#4672;&#4725;</h3>
+      <p>&#4840;&#4632;&#4635;&#4653;&#4963; &#4840;&#4632;&#4648;&#4851;&#4725; &#4773;&#4755; &#4813;&#4659;&#4756; &#4840;&#4632;&#4661;&#4864;&#4725; &#4733;&#4622;&#4723;&#4962;</p>
+    </div>
+  </div>
+  <p>&#4661;&#4616;&#4826;&#4613; <strong>&#4656;&#4813; &#4656;&#4651;&#4667; &#4773;&#4813;&#4672;&#4725;</strong> &#4635;&#4616;&#4725;: <em>&#4704;&#4656;&#4813; &#4840;&#4720;&#4656;&#4651; &#4752;&#4877;&#4653; &#4840;&#4637;&#4845;&#4635;&#4653;&#4963; &#4840;&#4637;&#4845;&#4648;&#4851; &#4808;&#4845;&#4637; &#4813;&#4659;&#4756; &#4840;&#4637;&#4845;&#4661;&#4864;&#4725;</em>&#4962;</p>
+  <p>AI &#4656;&#4813; &#4768;&#4845;&#4848;&#4616;&#4637;&#4962; &#4629;&#4845;&#4808;&#4725; &#4840;&#4616;&#4813;&#4637;&#4962; &#4632;&#4659;&#4650;&#4843; &#4752;&#4813; -- &#4773;&#4757;&#4848; &#4635;&#4616;&#4741;&#4843;&#4963; &#4709;&#4661;&#4781;&#4620;&#4725;&#4963; &#4808;&#4845;&#4637; &#4779;&#4621;&#4777;&#4616;&#4720;&#4653; -- &#4877;&#4757; &#4704;&#4867;&#4637; &#4840;&#4720;&#4808;&#4659;&#4704;&#4962;</p>
+  <div class="story-box">
+    <div class="label">&#x1F4D6; &#4616;&#4632;&#4648;&#4851;&#4725; &#4840;&#4637;&#4725;&#4648;&#4851; &#4723;&#4650;&#4781;</div>
+    <p>&#4704;&#4676;&#4720;-&#4632;&#4923;&#4613;&#4941;&#4725; &#4813;&#4661;&#4901; &#4840;&#4768;&#4757;&#4848; &#4632;&#4923;&#4613;&#4941; &#4843;&#4752;&#4704;&#4704; &#4877;&#4853;&#4637;&#4613; &#4773;&#4757;&#4851;&#4616;&#4613; &#4768;&#4661;&#4709;&#4962; &#4635;&#4757;&#4763;&#4813;&#4637; &#4899;&#4845;&#4678; &#4632;&#4899;&#4840;&#4677; &#4725;&#4733;&#4619;&#4616;&#4613;&#4963; &#4704;&#4941;&#4901;&#4752;&#4725; &#4845;&#4632;&#4621;&#4661;&#4616;&#4779;&#4616;&#4613;&#4962; &#4877;&#4757; &#4877;&#4853;&#4637;&#4613; &#4637;&#4877;&#4709; &#4672;&#4637;&#4658;&#4813; &#4768;&#4843;&#4813;&#4677;&#4637;&#4963; &#4827;&#4755;&#4709; &#4704;&#4937;&#4721; &#4619;&#4845; &#4768;&#4845;&#4656;&#4635;&#4813;&#4637;&#4963; &#4773;&#4877;&#4653; &#4779;&#4661; &#4768;&#4621;&#4720;&#4899;&#4813;&#4720;&#4637;&#4962;</p>
+    <p style="margin:0">AI &#4776;&#4826;&#4613; &#4877;&#4853;&#4637; &#4899;&#4621;&#4677; &#4845;&#4632;&#4659;&#4659;&#4619;&#4621;&#4962; &#4776;&#4632;&#4648;&#4867; &#4875;&#4653; &#4704;&#4941;&#4901;&#4752;&#4725; &#4635;&#4661;&#4720;&#4851;&#4848;&#4653; &#4845;&#4733;&#4619;&#4621;&#4963; &#4877;&#4757; &#4768;&#4616;&#4637;&#4757; &#4773;&#4757;&#4851;&#4757;&#4720; &#4768;&#4845;&#4616;&#4779;&#4813;&#4637;&#4962;</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sunset-orange);color:white">&#x1F4DA;</div>
+    <h2>AI &#4773;&#4757;&#4848;&#4725; &#4845;&#4635;&#4651;&#4621;?</h2>
+  </div>
+  <p>&#4768;&#4757;&#4720; &#4704;&#4632;&#4632;&#4621;&#4776;&#4725;&#4963; &#4704;&#4635;&#4851;&#4632;&#4901;&#4963; &#4704;&#4637;&#4621;&#4637;&#4635;&#4853; &#4773;&#4755; &#4661;&#4613;&#4720;&#4725; &#4704;&#4632;&#4661;&#4651;&#4725; &#4725;&#4635;&#4651;&#4616;&#4613;&#4962; &#4725;&#4757;&#4669; &#4661;&#4725;&#4614;&#4757; &#4674;&#4720;&#4656;&#4709;&#4613;&#4757; &#4704;&#4635;&#4851;&#4632;&#4901; &#4632;&#4755;&#4872;&#4653; &#4720;&#4635;&#4653;&#4776;&#4613;&#4962;</p>
+  <p>AI &#4704;&#4720;&#4632;&#4659;&#4659;&#4845; &#4632;&#4757;&#4872;&#4853; &#4845;&#4635;&#4651;&#4621;&#4963; &#4877;&#4757; &#4776;&#4629;&#4845;&#4808;&#4725; &#4621;&#4637;&#4853; &#4845;&#4621;&#4677; <strong>&#4848;&#4723;</strong> &#4845;&#4880;&#4632;&#4651;&#4621;&#4962;</p>
+  <div class="story-box">
+    <div class="label">&#x1F414; &#4637;&#4659;&#4620;: &#4854;&#4654; &#4773;&#4755; &#4941;&#4845;&#4621;</div>
+    <p>AI &#4854;&#4654; &#4776;&#4941;&#4845;&#4621; &#4773;&#4757;&#4852;&#4845;&#4616;&#4845; &#4635;&#4661;&#4720;&#4635;&#4653; &#4725;&#4937;&#4621;&#4873; &#4773;&#4757;&#4851;&#4616;&#4613; &#4768;&#4661;&#4709;&#4962; &#4704;&#4670;&#4614;&#4733; &#4637;&#4661;&#4620;&#4814;&#4733; &#4723;&#4651;&#4845;&#4768;&#4813;: "&#4845;&#4613; &#4854;&#4654; &#4752;&#4813;&#4962; &#4845;&#4613; &#4941;&#4845;&#4621; &#4752;&#4813;&#4962;"</p>
+    <p>&#4704;&#4672;&#4769; &#4637;&#4661;&#4620;&#4814;&#4733; &#4776;&#4723;&#4840; &#4704;&#4865;&#4619;&#4963; AI <strong>&#4677;&#4653;&#4926;&#4733;&#4757;</strong> &#4635;&#4808;&#4677; &#4845;&#4864;&#4637;&#4651;&#4621;&#4962;</p>
+    <p style="margin:0">&#4877;&#4757; &#4768;&#4661;&#4939;&#4619;&#4873;&#4813;&#4757; &#4768;&#4725;&#4653;&#4659;: <strong>AI &#4854;&#4654; &#4773;&#4757;&#4848;&#4637;&#4757; &#4773;&#4757;&#4848;&#4637;&#4845;&#4656;&#4635; &#4768;&#4843;&#4813;&#4677;&#4637;&#4962; &#4941;&#4845;&#4621; &#4704;&#4899;&#4725; &#4773;&#4757;&#4848;&#4637;&#4757; &#4773;&#4757;&#4848;&#4637;&#4845;&#4899;&#4651; &#4768;&#4843;&#4813;&#4677;&#4637;&#4962;</strong> &#4704;&#4637;&#4661;&#4620;&#4814;&#4733; &#4813;&#4661;&#4901; &#4677;&#4653;&#4926;&#4733;&#4757; &#4709;&#4731; &#4752;&#4813; &#4840;&#4637;&#4843;&#4813;&#4672;&#4813;&#4962;</p>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; &#4773;&#4757;&#4677;&#4661;&#4675;&#4656;: AI &#4609;&#4757;!</div>
+    <p>&#4776;&#4877;&#4853;&#4638;&#4731;&#4613;&#4609; &#4875;&#4653; &#4845;&#4613;&#4757;&#4757; &#4901;&#4843;&#4672; &#4725;&#4875;&#4813;&#4721;:</p>
+    <ol>
+      <li>&#4768;&#4757;&#4853; &#4656;&#4813; 10 &#4674;&#4653;&#4926;&#4733;&#4757; &#4845;&#4661;&#4619;&#4621; -- &#4768;&#4757;&#4851;&#4757;&#4854;&#4733; &#4781;&#4709;&#4963; &#4768;&#4757;&#4851;&#4757;&#4854;&#4733; &#4779;&#4648; &#4962;</li>
+      <li>&#4616;&#4877;&#4853;&#4637;&#4613; &#4768;&#4757;&#4853; &#4704;&#4768;&#4757;&#4853; &#4768;&#4651;&#4843;&#4813;&#4963; "&#4781;&#4709;" &#4808;&#4845;&#4637; "&#4779;&#4648;" &#4773;&#4843;&#4621;&#4781;&#4962;</li>
+      <li>&#4768;&#4850;&#4661; &#4674;&#4653;&#4926; &#4661;&#4616;&#4613; &#4901;&#4843;&#4672;: "&#4845;&#4613; &#4637;&#4757;&#4853;&#4757; &#4752;&#4813;?"</li>
+      <li>&#4877;&#4853;&#4637;&#4613; &#4776;&#4637;&#4659;&#4620;&#4814;&#4733; &#4720;&#4635;&#4648;&#4963; &#4621;&#4781; &#4773;&#4757;&#4848; AI!</li>
+    </ol>
+    <p style="margin:0"><strong>&#4813;&#4845;&#4845;&#4725;:</strong> &#4709;&#4827;&#4725; &#4781;&#4709; &#4768;&#4651;&#4845;&#4720;&#4613; &#4901;&#4678;&#4725; &#4779;&#4648; &#4709;&#4731; &#4707;&#4723;&#4651;&#4845;? &#4877;&#4853;&#4637;&#4613; &#4704;&#4725;&#4781;&#4781;&#4621; &#4635;&#4811;&#4672; &#4845;&#4733;&#4619;&#4621;? &#4845;&#4613; &#4704;AI &#4813;&#4661;&#4901; &#4773;&#4813;&#4752;&#4720;&#4763; &#4733;&#4877;&#4653; &#4752;&#4813; -- <em>&#4768;&#4853;&#4617;&#4814;&#4723;&#4810;</em> &#4845;&#4707;&#4619;&#4621;&#4962;</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--baobab-green);color:white">&#x1F30D;</div>
+    <h2>AI &#4704;&#4827;&#4707;&#4843;&#4733;&#4757;</h2>
+  </div>
+  <p>AI &#4704;&#4709;&#4827;&#4725; &#4674;&#4723;&#4814;&#4733; &#4773;&#4840;&#4656;&#4651; &#4752;&#4813; -- &#4704;&#4768;&#4941;&#4650;&#4779;&#4637; &#4869;&#4637;&#4654;:</p>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F33E;</div>
+      <h3>&#4773;&#4653;&#4667;</h3>
+      <p>AI &#4872;&#4709;&#4648;&#4814;&#4733;&#4757; &#4632;&#4731; &#4773;&#4757;&#4848;&#4637;&#4845;&#4824;&#4653;&#4817; &#4773;&#4755; &#4827;&#4755;&#4709; &#4632;&#4731; &#4773;&#4757;&#4848;&#4637;&#4637;&#4899; &#4845;&#4648;&#4851;&#4617;&#4962;</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4F1;</div>
+      <h3>&#4840;&#4638;&#4707;&#4845;&#4621; &#4872;&#4757;&#4824;&#4709;</h3>
+      <p>&#4704;&#4661;&#4621;&#4781; &#4872;&#4757;&#4824;&#4709; &#4661;&#4725;&#4621;&#4781;&#4963; AI &#4853;&#4629;&#4752;&#4725;&#4757; &#4845;&#4936;&#4725;&#4667;&#4621;&#4962;</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F3E5;</div>
+      <h3>&#4869;&#4757;&#4752;&#4725;</h3>
+      <p>AI &#4614;&#4781;&#4720;&#4654;&#4733;&#4757; &#4704;&#4936;&#4901;&#4752;&#4725; &#4704;&#4669;&#4725; &#4773;&#4757;&#4852;&#4843;&#4872;&#4765; &#4845;&#4648;&#4851;&#4617;&#4962;</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F5E3;&#xFE0F;</div>
+      <h3>&#4677;&#4757;&#4675;</h3>
+      <p>AI &#4840;&#4768;&#4941;&#4650;&#4779; &#4677;&#4757;&#4675;&#4814;&#4733;&#4757; &#4773;&#4840;&#4720;&#4635;&#4648; &#4752;&#4813;&#4962;</p>
+    </div>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--clay-red);color:white">&#x26A0;&#xFE0F;</div>
+    <h2>AI &#4653;&#4677;&#4725; &#4768;&#4845;&#4848;&#4616;&#4637;</h2>
+  </div>
+  <div class="story-box">
+    <div class="label">&#x2757; &#4845;&#4613;&#4757;&#4757; &#4768;&#4661;&#4723;&#4813;&#4661;</div>
+    <p style="margin:0;font-size:1.15rem"><strong>AI &#4637;&#4661;&#4779;&#4621; &#4845;&#4614;&#4755;&#4621;&#4962; AI &#4941;&#4725;&#4627;&#4810; &#4845;&#4614;&#4755;&#4621;&#4962; AI &#4773;&#4757;&#4848; &#4656;&#4813; &#4768;&#4843;&#4661;&#4709;&#4637;&#4962; AI &#4704;&#4656;&#4814;&#4733; &#4840;&#4720;&#4656;&#4651; &#4632;&#4659;&#4650;&#4843; &#4752;&#4813; -- &#4656;&#4814;&#4733;&#4637; &#4661;&#4613;&#4720;&#4725; &#4845;&#4656;&#4651;&#4617;&#4962;</strong></p>
+  </div>
+  <div class="think-box">
+    <div class="label">&#x1F914; &#4768;&#4661;&#4709;&#4704;&#4725;</div>
+    <p>AI &#4776;&#4768;&#4757;&#4853; &#4768;&#4872;&#4653; &#4704;&#4720;&#4656;&#4704;&#4656;&#4769; &#4637;&#4661;&#4620;&#4814;&#4733; &#4709;&#4731; &#4672;&#4621;&#4901;&#4758; &#4674;&#4846; &#4840;&#4632;&#4758;&#4650;&#4843;&#4613;&#4757; &#4752;&#4872;&#4654;&#4733; &#4843;&#4808;&#4675;&#4617;?</p>
+    <p style="margin:0">&#4616;&#4826;&#4613; &#4752;&#4813; <strong>&#4840;&#4768;&#4757;&#4720; &#4773;&#4813;&#4672;&#4725; &#4768;&#4661;&#4939;&#4619;&#4873; &#4840;&#4614;&#4752;&#4813;</strong>&#4962; &#4768;&#4616;&#4637; &#4616;&#4609;&#4617;&#4637; &#4840;&#4637;&#4725;&#4656;&#4651; AI &#4616;&#4632;&#4877;&#4707;&#4725; &#4776;&#4609;&#4617;&#4637; &#4674;&#4723; &#4656;&#4814;&#4733; &#4843;&#4661;&#4939;&#4621;&#4873;&#4617;&#4962;</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--earth-brown);color:white">&#x1F4DD;</div>
+    <h2>&#4768;&#4852;&#4661; &#4674;&#4619;&#4725;&#4613;</h2>
+  </div>
+  <div class="word-bank">
+    <span class="word-tag">&#4656;&#4813; &#4656;&#4651;&#4667; &#4773;&#4813;&#4672;&#4725; (AI)</span>
+    <span class="word-tag">&#4840;&#4635;&#4669;&#4757; &#4725;&#4637;&#4613;&#4653;&#4725;</span>
+    <span class="word-tag">&#4848;&#4723;</span>
+    <span class="word-tag">&#4677;&#4653;&#4926;</span>
+    <span class="word-tag">&#4768;&#4853;&#4617;&#4814;&#4723;&#4810;&#4752;&#4725;</span>
+    <span class="word-tag">&#4768;&#4621;&#4878;&#4650;&#4827;&#4637;</span>
+    <span class="word-tag">&#4632;&#4659;&#4650;&#4843;</span>
+  </div>
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; &#4840;&#4632;&#4864;&#4632;&#4650;&#4843; &#4773;&#4757;&#4677;&#4661;&#4675;&#4656;</div>
+    <ul>
+      <li><strong>&#4661;&#4616;&#4813;</strong> AI &#4637;&#4757; &#4845;&#4632;&#4661;&#4621;&#4613;&#4755;&#4621; &#4709;&#4616;&#4613; &#4840;&#4635;&#4661;&#4704;&#4813;&#4757;&#4962;</li>
+      <li><strong>&#4926;&#4941;</strong> &#4661;&#4616;&#4720;&#4635;&#4653;&#4776;&#4813; &#4667;&#4661;&#4725; &#4827;&#4653;&#4937;&#4817;&#4733;&#4962;</li>
+      <li><strong>&#4757;&#4872;&#4653;</strong> &#4704;&#4674;&#4725;&#4613; &#4813;&#4661;&#4901; &#4661;&#4616; AI &#4768;&#4757;&#4853; &#4752;&#4872;&#4653; &#4840;&#4720;&#4635;&#4653;&#4776;&#4813;&#4757;&#4962;</li>
+    </ul>
+    <p style="margin:0">&#4840;&#4632;&#4635;&#4653; &#4725;&#4621;&#4677;&#4773; &#4632;&#4757;&#4872;&#4853; &#4840;&#4768;&#4757;&#4720;&#4757; &#4773;&#4813;&#4672;&#4725; &#4635;&#4707;&#4939;&#4725; &#4752;&#4813;&#4962;</p>
+  </div>
+</div>
+
+</div><!-- end Amharic -->
+
+<!-- ======== COMING NEXT (all languages) ======== -->
+<div class="promise-section">
+  <div class="lang en active">
+    <h2>&#x1F31F; More Lessons Are Coming! &#x1F31F;</h2>
+    <p><strong>How to talk to AI</strong> -- and how it talks back</p>
+    <p><strong>How AI makes pictures and music</strong> -- even though it cannot see or hear</p>
+    <p><strong>How people in Africa are building AI</strong> -- in your languages, for your needs</p>
+    <p><strong>How you can start learning to build with AI</strong> -- step by step</p>
+  </div>
+  <div class="lang sw">
+    <h2>&#x1F31F; Masomo Zaidi Yanakuja! &#x1F31F;</h2>
+    <p><strong>Jinsi ya kuzungumza na AI</strong> -- na jinsi inavyojibu</p>
+    <p><strong>Jinsi AI inavyotengeneza picha na muziki</strong></p>
+    <p><strong>Jinsi watu wa Afrika wanavyojenga AI</strong> -- kwa lugha zenu</p>
+    <p><strong>Jinsi unavyoweza kuanza kujifunza kujenga na AI</strong></p>
+  </div>
+  <div class="lang fr">
+    <h2>&#x1F31F; D'autres Le&ccedil;ons Arrivent ! &#x1F31F;</h2>
+    <p><strong>Comment parler &agrave; l'IA</strong> -- et comment elle r&eacute;pond</p>
+    <p><strong>Comment l'IA cr&eacute;e des images et de la musique</strong></p>
+    <p><strong>Comment les Africains construisent l'IA</strong> -- dans vos langues</p>
+    <p><strong>Comment commencer &agrave; construire avec l'IA</strong></p>
+  </div>
+  <div class="lang ha">
+    <h2>&#x1F31F; Karin Darussa Suna Zuwa! &#x1F31F;</h2>
+    <p><strong>Yadda ake magana da AI</strong> -- da yadda yake amsa</p>
+    <p><strong>Yadda AI yake yin hotuna da kida</strong></p>
+    <p><strong>Yadda mutanen Afirka suke gina AI</strong> -- cikin harsunanka</p>
+    <p><strong>Yadda za ka fara koyon gina da AI</strong></p>
+  </div>
+  <div class="lang am">
+    <h2>&#x1F31F; &#4720;&#4872;&#4635;&#4730; &#4725;&#4637;&#4613;&#4653;&#4726;&#4733; &#4773;&#4840;&#4632;&#4897;! &#x1F31F;</h2>
+    <p><strong>&#4776;AI &#4875;&#4653; &#4773;&#4757;&#4848;&#4725; &#4773;&#4757;&#4848;&#4637;&#4725;&#4755;&#4872;&#4653;</strong></p>
+    <p><strong>AI &#4637;&#4661;&#4620;&#4814;&#4733;&#4757; &#4773;&#4755; &#4637;&#4827;&#4677;&#4757; &#4773;&#4757;&#4848;&#4725; &#4773;&#4757;&#4848;&#4637;&#4845;&#4656;&#4651;</strong></p>
+    <p><strong>&#4704;&#4768;&#4941;&#4650;&#4779; &#4813;&#4661;&#4901; &#4843;&#4617; &#4656;&#4814;&#4733; AI &#4773;&#4757;&#4848;&#4725; &#4773;&#4757;&#4848;&#4637;&#4845;&#4872;&#4757;&#4769;</strong></p>
+    <p><strong>&#4776;AI &#4875;&#4653; &#4632;&#4877;&#4707;&#4725; &#4773;&#4757;&#4848;&#4725; &#4632;&#4864;&#4632;&#4653; &#4773;&#4757;&#4848;&#4637;&#4725;&#4733;&#4621;</strong></p>
+  </div>
+  <div class="coming-soon">&#x2764;&#xFE0F;</div>
+</div>
+
+<!-- ======== FOOTER ======== -->
+<div class="footer">
+  <p>
+    <strong>What Is AI? A First Look for Young Learners</strong><br>
+    Created by Claude for Anthropomorphic Press<br>
+    With Paola Di Maio, W3C AI Knowledge Representation Community Group<br>
+    <br>
+    English &middot; Kiswahili &middot; Fran&ccedil;ais &middot; Hausa &middot; &#4768;&#4635;&#4653;&#4763;<br>
+    <br>
+    Free to share, print, and use in classrooms everywhere.<br>
+    <a href="https://anthropomorphicpress.substack.com">anthropomorphicpress.substack.com</a>
+  </p>
+</div>
+
+<script>
+function switchLang(lang) {
+  // Hide all language content
+  document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+  // Show selected language
+  document.querySelectorAll('.lang.' + lang).forEach(el => el.classList.add('active'));
+  // Update button states
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
