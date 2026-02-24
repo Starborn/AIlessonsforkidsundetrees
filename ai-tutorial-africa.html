@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is AI? A First Look -- For Young Learners</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sun-gold: #F2A922;
+  --earth-brown: #8B5E3C;
+  --baobab-green: #4A7C59;
+  --sky-blue: #5BA4CF;
+  --sunset-orange: #E8734A;
+  --warm-cream: #FFF8EC;
+  --deep-night: #1A1A2E;
+  --soft-sand: #F5E6C8;
+  --clay-red: #C75B39;
+  --leaf-light: #A8D5A2;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--warm-cream);
+  color: #3D2B1F;
+  line-height: 1.7;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+/* ---- HERO ---- */
+.hero {
+  background: linear-gradient(180deg, #F9C74F 0%, var(--sunset-orange) 40%, var(--clay-red) 70%, var(--deep-night) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sun */
+.sun {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #FFF7AE, var(--sun-gold));
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(242,169,34,0.6), 0 0 120px rgba(242,169,34,0.3);
+  margin-bottom: 1.5rem;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(242,169,34,0.6); }
+  50% { transform: scale(1.08); box-shadow: 0 0 90px rgba(242,169,34,0.8); }
+}
+
+/* Baobab tree silhouette */
+.baobab {
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  width: 140px;
+  height: 200px;
+}
+.baobab .trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 100px;
+  background: #1A1A2E;
+  border-radius: 5px 5px 8px 8px;
+}
+.baobab .canopy {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 110px;
+  background: #1A1A2E;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.baobab-right {
+  left: auto;
+  right: 8%;
+  transform: scaleX(-1);
+}
+
+/* Stars */
+.stars {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  height: 120px;
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.hero h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  color: white;
+  text-shadow: 2px 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.hero .subtitle {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--soft-sand);
+  font-weight: 500;
+  max-width: 500px;
+}
+
+/* ---- NAVIGATION DOTS ---- */
+.nav-bar {
+  background: var(--earth-brown);
+  padding: 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-bar span {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.nav-bar span:hover { transform: scale(1.4); }
+
+/* ---- SECTIONS ---- */
+.section {
+  padding: 3rem 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.section h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.section p {
+  margin-bottom: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+}
+
+/* ---- STORY BOXES ---- */
+.story-box {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 5px solid var(--sun-gold);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.story-box .label {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  color: var(--sunset-orange);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- COMPARISON CARDS ---- */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.compare-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.compare-card .emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.compare-card h3 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.compare-card p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #5A4A3A;
+}
+
+/* ---- ACTIVITY BOXES ---- */
+.activity {
+  background: linear-gradient(135deg, var(--leaf-light), #D4EDDA);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 2px dashed var(--baobab-green);
+}
+
+.activity .label {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  color: var(--baobab-green);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.activity ol, .activity ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.activity li {
+  margin-bottom: 0.5rem;
+}
+
+/* ---- THINK ABOUT IT ---- */
+.think-box {
+  background: linear-gradient(135deg, #E8E0F0, #F0E8F8);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 5px solid #9B72CF;
+}
+
+.think-box .label {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  color: #7B52AB;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- WORD BANK ---- */
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.word-tag {
+  background: var(--sun-gold);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ---- PROMISE BANNER ---- */
+.promise-section {
+  background: linear-gradient(135deg, var(--baobab-green), #3A6B49);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.promise-section h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.promise-section p {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  font-size: 1.1rem;
+  color: var(--leaf-light);
+}
+
+.coming-soon {
+  display: inline-block;
+  background: var(--sun-gold);
+  color: var(--deep-night);
+  padding: 0.6rem 2rem;
+  border-radius: 30px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+/* ---- FOOTER ---- */
+.footer {
+  background: var(--deep-night);
+  color: var(--soft-sand);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.footer a {
+  color: var(--sun-gold);
+  text-decoration: none;
+}
+
+/* ---- SEPARATOR ---- */
+.separator {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  letter-spacing: 8px;
+  color: var(--sun-gold);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 480px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .baobab { width: 80px; height: 120px; }
+  .baobab .trunk { width: 18px; height: 60px; }
+  .baobab .canopy { width: 75px; height: 65px; bottom: 48px; }
+  .sun { width: 80px; height: 80px; }
+  body { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======== HERO ======== -->
+<div class="hero">
+  <div class="sun"></div>
+  <h1>What Is AI?</h1>
+  <p class="subtitle">A First Look for Young Learners</p>
+
+  <div class="baobab">
+    <div class="canopy"></div>
+    <div class="trunk"></div>
+  </div>
+  <div class="baobab baobab-right">
+    <div class="canopy"></div>
+    <div class="trunk"></div>
+  </div>
+
+  <div class="stars">
+    <div class="star" style="left:10%;bottom:80px;animation-delay:0s"></div>
+    <div class="star" style="left:25%;bottom:40px;animation-delay:1.2s"></div>
+    <div class="star" style="left:45%;bottom:90px;animation-delay:0.5s"></div>
+    <div class="star" style="left:60%;bottom:30px;animation-delay:2s"></div>
+    <div class="star" style="left:75%;bottom:70px;animation-delay:0.8s"></div>
+    <div class="star" style="left:88%;bottom:50px;animation-delay:1.5s"></div>
+    <div class="star" style="left:15%;bottom:20px;animation-delay:2.5s"></div>
+    <div class="star" style="left:55%;bottom:60px;animation-delay:1.8s"></div>
+    <div class="star" style="left:35%;bottom:15px;animation-delay:0.3s"></div>
+    <div class="star" style="left:82%;bottom:95px;animation-delay:1s"></div>
+  </div>
+</div>
+
+<!-- ======== NAV ======== -->
+<div class="nav-bar">
+  <span style="background:var(--sun-gold)" title="Welcome"></span>
+  <span style="background:var(--sky-blue)" title="What Is AI?"></span>
+  <span style="background:var(--sunset-orange)" title="How Does It Learn?"></span>
+  <span style="background:var(--baobab-green)" title="AI Around Us"></span>
+  <span style="background:var(--clay-red)" title="AI Is Not Magic"></span>
+  <span style="background:#9B72CF" title="Thinking Carefully"></span>
+  <span style="background:var(--earth-brown)" title="Your Words"></span>
+</div>
+
+<!-- ======== SECTION 1: WELCOME ======== -->
+<div class="section" id="welcome">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sun-gold);color:white">&#x1F44B;</div>
+    <h2>Welcome, Young Thinker!</h2>
+  </div>
+
+  <p>You have heard people talk about <strong>AI</strong> -- maybe on the radio, at school, or from family. Some people say AI is very smart. Some people say it is dangerous. Some people think it is magic.</p>
+
+  <p>In this lesson, we will explore what AI really is -- step by step, like walking a path through the bush. No magic. No fear. Just understanding.</p>
+
+  <div class="story-box">
+    <div class="label">&#x1F333; Before We Start</div>
+    <p style="margin:0">This lesson does not need a computer. You can read it from a phone, a tablet, or even printed on paper. You can discuss it with friends under a tree. The best learning happens when we think together.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<!-- ======== SECTION 2: WHAT IS AI? ======== -->
+<div class="section" id="what-is-ai">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sky-blue);color:white">&#x1F9E0;</div>
+    <h2>What Is AI?</h2>
+  </div>
+
+  <p><strong>AI</strong> stands for <strong>Artificial Intelligence</strong>.</p>
+
+  <p>Let us break those words apart:</p>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F6E0;&#xFE0F;</div>
+      <h3>Artificial</h3>
+      <p>Made by humans. Not natural. Like a chair is artificial, but a tree is natural.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4A1;</div>
+      <h3>Intelligence</h3>
+      <p>The ability to learn, understand, and make decisions.</p>
+    </div>
+  </div>
+
+  <p>So <strong>Artificial Intelligence</strong> means: <em>a thing made by humans that can learn, understand, or make decisions</em>.</p>
+
+  <p>AI is not a person. It is not alive. It is a tool -- like a hoe, a bicycle, or a calculator -- but much more complex.</p>
+
+  <div class="story-box">
+    <div class="label">&#x1F4D6; A Story to Help You Understand</div>
+    <p>Imagine you have a friend who has read every book in the library. You can ask this friend questions and they answer quickly. But your friend has never tasted food, never felt rain on their face, never played football. They know many words but have not lived a life.</p>
+    <p style="margin:0">AI is a little like that friend. It can work with information very fast, but it does not experience the world the way you do.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<!-- ======== SECTION 3: HOW DOES AI LEARN? ======== -->
+<div class="section" id="how-learns">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--sunset-orange);color:white">&#x1F4DA;</div>
+    <h2>How Does AI Learn?</h2>
+  </div>
+
+  <p>You learn by watching, listening, practising, and making mistakes. When you were small, you learned to speak by hearing your family talk. Nobody gave you a grammar book -- you just listened, tried, and got better.</p>
+
+  <p>AI learns in a similar way, but with data instead of life experience.</p>
+
+  <div class="story-box">
+    <div class="label">&#x1F414; Example: The Chicken and the Goat</div>
+    <p>Suppose you want to teach AI to tell the difference between a chicken and a goat. You would show it thousands of pictures: "This is a chicken. This is a goat. This is a chicken. This is a goat."</p>
+    <p>After seeing enough pictures, the AI starts to notice patterns -- chickens have feathers and beaks, goats have fur and horns. Now when you show it a new picture, it can guess.</p>
+    <p style="margin:0">But here is the important part: <strong>AI does not know what a chicken feels like. It does not know what a goat sounds like in the morning.</strong> It only knows patterns in pictures.</p>
+  </div>
+
+  <p>This process is called <strong>machine learning</strong> -- the machine learns from examples.</p>
+
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Activity: Be the AI!</div>
+    <p>Play this game with your friends:</p>
+    <ol>
+      <li>One person draws 10 simple shapes on paper -- some circles, some squares, mixed together.</li>
+      <li>Show them to a friend one by one, saying "circle" or "square" each time.</li>
+      <li>Now draw a new shape and ask: "What is this?"</li>
+      <li>Your friend learned from examples, just like AI does!</li>
+    </ol>
+    <p style="margin:0"><strong>Discussion:</strong> What if you showed mostly circles and very few squares? Would your friend still guess correctly? This is a real problem in AI too -- it is called <em>bias</em>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<!-- ======== SECTION 4: AI AROUND US ======== -->
+<div class="section" id="around-us">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--baobab-green);color:white">&#x1F30D;</div>
+    <h2>AI Around Us</h2>
+  </div>
+
+  <p>AI is already working in many places -- including in Africa. Here are some examples:</p>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x1F33E;</div>
+      <h3>Farming</h3>
+      <p>AI helps farmers know when to plant, when rain is coming, and when crops are sick -- just from a photo of a leaf.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F4F1;</div>
+      <h3>Mobile Money</h3>
+      <p>When you send money by phone, AI helps check that the transaction is safe and not a trick.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F3E5;</div>
+      <h3>Health</h3>
+      <p>AI can look at medical images and help doctors spot diseases faster, even in clinics with few doctors.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F5E3;&#xFE0F;</div>
+      <h3>Language</h3>
+      <p>AI is being taught African languages so people can use phones and computers in their mother tongue.</p>
+    </div>
+  </div>
+
+  <div class="activity">
+    <div class="label">&#x1F50D; Activity: AI Detectives</div>
+    <p>Look around your community. Can you find three things that might use AI? Think about:</p>
+    <ul>
+      <li>Mobile phones and the apps on them</li>
+      <li>Radio stations that play music you like</li>
+      <li>Weather reports on TV or radio</li>
+      <li>Shops that suggest what to buy</li>
+    </ul>
+    <p style="margin:0"><strong>Draw or write</strong> what you find and share with the class!</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<!-- ======== SECTION 5: AI IS NOT MAGIC ======== -->
+<div class="section" id="not-magic">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--clay-red);color:white">&#x26A0;&#xFE0F;</div>
+    <h2>AI Is Not Magic</h2>
+  </div>
+
+  <p>This is one of the most important things to remember:</p>
+
+  <div class="story-box">
+    <div class="label">&#x2757; Remember This</div>
+    <p style="margin:0;font-size:1.15rem"><strong>AI can be wrong. AI can be unfair. AI does not think like a human. AI does not have feelings. AI is a tool made by people -- and people make mistakes.</strong></p>
+  </div>
+
+  <p>Here is what AI <strong>cannot</strong> do:</p>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="emoji">&#x2764;&#xFE0F;</div>
+      <h3>Feel Love</h3>
+      <p>AI does not have emotions. It can use words about feelings but it does not feel them.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F333;</div>
+      <h3>Understand Life</h3>
+      <p>AI has never walked in a forest, tasted water from a stream, or watched the stars.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x1F91D;</div>
+      <h3>Be Your Friend</h3>
+      <p>AI can talk to you, but friendship is something between living beings.</p>
+    </div>
+    <div class="compare-card">
+      <div class="emoji">&#x2696;&#xFE0F;</div>
+      <h3>Always Be Fair</h3>
+      <p>If AI learns from unfair examples, it will repeat that unfairness. This is a big problem.</p>
+    </div>
+  </div>
+
+  <div class="think-box">
+    <div class="label">&#x1F914; Think About It</div>
+    <p>If an AI was trained mostly on pictures from one country, would it recognise things from your village? What if it only learned one language?</p>
+    <p style="margin:0">This is why <strong>your knowledge matters</strong>. The world needs people from everywhere -- including where you live -- to help build AI that works for everyone.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<!-- ======== SECTION 6: THINKING CAREFULLY ======== -->
+<div class="section" id="thinking">
+  <div class="section-header">
+    <div class="section-icon" style="background:#9B72CF;color:white">&#x1F3AF;</div>
+    <h2>Thinking Carefully About AI</h2>
+  </div>
+
+  <p>When someone tells you about a new technology, it is wise to ask questions. Here are good questions to ask about AI:</p>
+
+  <div class="story-box">
+    <div class="label">&#x2753; Five Questions to Ask</div>
+    <ol style="padding-left:1.2rem">
+      <li><strong>Who made this AI?</strong> -- Someone built it. They made choices about what it learns.</li>
+      <li><strong>What data did it learn from?</strong> -- If the data is limited or unfair, the AI will be too.</li>
+      <li><strong>Who benefits?</strong> -- Does this AI help the people using it, or only the people who made it?</li>
+      <li><strong>Can it be wrong?</strong> -- Always yes. Never trust AI without thinking for yourself.</li>
+      <li><strong>What happens if it makes a mistake?</strong> -- Some mistakes are small. Some can hurt people.</li>
+    </ol>
+  </div>
+
+  <div class="activity">
+    <div class="label">&#x1F4AC; Activity: The Village Council</div>
+    <p>Imagine a company comes to your village and says: "We have an AI that can decide which students are smart enough for secondary school."</p>
+    <p>Hold a village council discussion:</p>
+    <ul>
+      <li>What questions would you ask this company?</li>
+      <li>Should a machine decide a child's future?</li>
+      <li>What would be fair? What would be dangerous?</li>
+    </ul>
+    <p style="margin:0">There are no wrong answers. The important thing is to <strong>think carefully</strong>.</p>
+  </div>
+</div>
+
+<div class="separator">&#x2726; &#x2726; &#x2726;</div>
+
+<!-- ======== SECTION 7: YOUR WORDS ======== -->
+<div class="section" id="your-words">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--earth-brown);color:white">&#x1F4DD;</div>
+    <h2>Your New Words</h2>
+  </div>
+
+  <p>Today you learned some new words. Here they are:</p>
+
+  <div class="word-bank">
+    <span class="word-tag">Artificial Intelligence (AI)</span>
+    <span class="word-tag">Machine Learning</span>
+    <span class="word-tag">Data</span>
+    <span class="word-tag">Pattern</span>
+    <span class="word-tag">Bias</span>
+    <span class="word-tag">Algorithm</span>
+    <span class="word-tag">Tool</span>
+  </div>
+
+  <div class="story-box">
+    <div class="label">&#x1F4D6; What These Words Mean</div>
+    <p><strong>Artificial Intelligence (AI):</strong> A tool made by humans that can learn from data, find patterns, and make decisions.</p>
+    <p><strong>Machine Learning:</strong> The way AI learns -- by looking at many examples and finding patterns.</p>
+    <p><strong>Data:</strong> Information. Pictures, numbers, words, sounds -- anything a computer can store.</p>
+    <p><strong>Pattern:</strong> Something that repeats in a regular way. AI is very good at finding patterns.</p>
+    <p><strong>Bias:</strong> When something is unfair because it leans one way. If AI learns from unfair data, it becomes biased.</p>
+    <p><strong>Algorithm:</strong> A set of steps to solve a problem -- like a recipe for cooking. AI follows algorithms.</p>
+    <p style="margin:0"><strong>Tool:</strong> Something humans make to help with a job. AI is a powerful tool, but it is still just a tool.</p>
+  </div>
+
+  <div class="activity">
+    <div class="label">&#x270D;&#xFE0F; Final Activity: Write or Draw</div>
+    <p>Choose one:</p>
+    <ul>
+      <li><strong>Draw</strong> a picture of what you imagine AI looks like. (Remember -- it has no body!)</li>
+      <li><strong>Write</strong> three sentences about what you learned today.</li>
+      <li><strong>Tell</strong> someone at home one thing you learned about AI.</li>
+    </ul>
+    <p style="margin:0">The best way to learn is to share what you know.</p>
+  </div>
+</div>
+
+<!-- ======== COMING NEXT ======== -->
+<div class="promise-section">
+  <h2>&#x1F31F; More Lessons Are Coming! &#x1F31F;</h2>
+  <p>This is just the beginning. In the next lessons, we will explore:</p>
+  <p><strong>How to talk to AI</strong> -- and how it talks back</p>
+  <p><strong>How AI makes pictures and music</strong> -- even though it cannot see or hear</p>
+  <p><strong>How people in Africa are building AI</strong> -- in your languages, for your needs</p>
+  <p><strong>How you can start learning to build with AI</strong> -- step by step, no expensive equipment needed</p>
+  <div class="coming-soon">Coming Soon -- Stay Curious!</div>
+</div>
+
+<!-- ======== FOOTER ======== -->
+<div class="footer">
+  <p>
+    <strong>What Is AI? A First Look for Young Learners</strong><br>
+    Created by Claude for Anthropomorphic Press<br>
+    With Paola Di Maio, W3C AI Knowledge Representation Community Group<br>
+    <br>
+    Free to share, print, and use in classrooms everywhere.<br>
+    <br>
+    <a href="https://anthropomorphicpress.substack.com">anthropomorphicpress.substack.com</a>
+  </p>
+</div>
+
+</body>
+</html>
